@@ -1,12 +1,21 @@
+import heroImage from "@/assets/hero-centenary.jpg";
+
 const Hero = () => {
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          background: 'var(--gradient-hero)',
-        }}
-      />
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={heroImage} 
+          alt="JKKN Educational Institution" 
+          className="w-full h-full object-cover"
+        />
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.9) 0%, rgba(255, 140, 82, 0.85) 50%, rgba(255, 165, 107, 0.8) 100%)',
+          }}
+        />
+      </div>
       
       <div className="container relative z-10 px-6 py-24 text-center">
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-6 animate-fade-in tracking-tight">
