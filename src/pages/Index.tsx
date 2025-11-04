@@ -4,6 +4,7 @@ import ActivityCard from "@/components/ActivityCard";
 import FilterBar from "@/components/FilterBar";
 import StatsOverview from "@/components/StatsOverview";
 import ShareButtons from "@/components/ShareButtons";
+import SEO from "@/components/SEO";
 import { allActivities, type Category } from "@/data/all-activities";
 import { ActivityStatus } from "@/components/StatusBadge";
 
@@ -29,7 +30,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO />
       <Hero />
+      
+      <a id="main-content" className="sr-only">Main Content</a>
       
       <StatsOverview />
       
@@ -42,9 +46,9 @@ const Index = () => {
         onStatusChange={setSelectedStatus}
       />
       
-      <main className="container px-6 py-12">
+      <main className="container px-6 py-12" role="main" aria-label="Centenary initiatives">
         {filteredActivities.length === 0 ? (
-          <div className="text-center py-20">
+          <div className="text-center py-20" role="status" aria-live="polite">
             <h3 className="text-2xl font-semibold text-muted-foreground mb-2">
               No activities found
             </h3>
@@ -55,13 +59,13 @@ const Index = () => {
         ) : (
           <>
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-semibold text-foreground">
+              <h2 className="text-2xl font-semibold text-foreground" role="status" aria-live="polite">
                 {filteredActivities.length} {filteredActivities.length === 1 ? 'Activity' : 'Activities'}
               </h2>
               <ShareButtons title="JKKN Centenary" />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" role="list" aria-label="List of centenary initiatives">
               {filteredActivities.map((activity, index) => (
                 <ActivityCard key={activity.id} activity={activity} index={index} />
               ))}
@@ -70,7 +74,7 @@ const Index = () => {
         )}
       </main>
       
-      <footer className="border-t-2 py-20 mt-24 relative overflow-hidden" style={{
+      <footer className="border-t-2 py-20 mt-24 relative overflow-hidden" role="contentinfo" aria-label="Footer" style={{
         borderImage: "linear-gradient(90deg, transparent, hsl(var(--primary)), transparent) 1",
         background: "linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--secondary)/0.3) 50%, hsl(var(--primary)/0.05) 100%)",
       }}>

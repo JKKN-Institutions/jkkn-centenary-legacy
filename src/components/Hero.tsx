@@ -39,6 +39,8 @@ const Hero = () => {
           style={{
             textShadow: '0 4px 12px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1)',
           }}
+          role="heading"
+          aria-level={1}
         >
           JKKN CENTENARY
         </h1>

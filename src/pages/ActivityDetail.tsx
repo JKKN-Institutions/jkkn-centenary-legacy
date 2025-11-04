@@ -7,6 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ProgressRing from "@/components/ProgressRing";
 import Timeline, { TimelineMilestone } from "@/components/Timeline";
 import RelatedActivities from "@/components/RelatedActivities";
+import SEO from "@/components/SEO";
 import { allActivities } from "@/data/all-activities";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -92,6 +93,11 @@ const ActivityDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title={`${activity.title} - JKKN Centenary`}
+        description={activity.impact}
+      />
+      
       {/* Back Navigation */}
       <div className="container px-6 py-8">
         <Link 
@@ -147,7 +153,7 @@ const ActivityDetail = () => {
       )}
 
       {/* Main Content Section */}
-      <main className="container px-6 pb-24">
+      <main className="container px-6 pb-24" role="main" aria-label="Initiative details">
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-12">
           {/* Main Content Column */}

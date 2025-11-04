@@ -15,6 +15,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/activity/:id" element={<ActivityDetail />} />

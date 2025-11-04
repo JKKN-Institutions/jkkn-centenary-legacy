@@ -53,14 +53,15 @@ const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
   const showProgress = activity.status === "in-progress" && activity.progress !== undefined;
   
   return (
-    <div
+    <article
       ref={cardRef}
       className={`transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       }`}
       style={{ transitionDelay: `${index * 80}ms` }}
+      aria-label={`${activity.title} initiative`}
     >
-      <Link to={`/activity/${activity.id}`} className="group block h-full">
+      <Link to={`/activity/${activity.id}`} className="group block h-full" aria-label={`View details for ${activity.title}`}>
         <Card className="h-full overflow-hidden transition-all duration-500 hover:-translate-y-3 bg-card relative"
           style={{
             boxShadow: "0 4px 16px hsl(var(--foreground) / 0.08)",
@@ -144,7 +145,7 @@ const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
           </CardFooter>
         </Card>
       </Link>
-    </div>
+    </article>
   );
 };
 
