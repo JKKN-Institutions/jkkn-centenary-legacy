@@ -3,6 +3,9 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import StatusBadge, { ActivityStatus } from "./StatusBadge";
 import ProgressBar from "./ProgressBar";
 import { ArrowRight } from "lucide-react";
+import { useRef } from "react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import ShimmerLoader from "./ShimmerLoader";
 
 import placardsImg from "@/assets/placards.jpg";
 import workersHonoredImg from "@/assets/workers-honored.jpg";
@@ -23,6 +26,7 @@ export interface Activity {
   description?: string;
   progress?: number;
   image?: string;
+  category?: string;
 }
 
 const imageMap: Record<string, string> = {
@@ -39,55 +43,108 @@ const imageMap: Record<string, string> = {
 
 interface ActivityCardProps {
   activity: Activity;
+  index?: number;
 }
 
-const ActivityCard = ({ activity }: ActivityCardProps) => {
+const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(cardRef, { threshold: 0.1 });
   const imageUrl = activity.image ? imageMap[activity.image] : null;
   const showProgress = activity.status === "in-progress" && activity.progress !== undefined;
   
   return (
-    <Link to={`/activity/${activity.id}`} className="group">
-      <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 bg-card border-border">
-        {imageUrl ? (
-          <div className="w-full aspect-video overflow-hidden">
-            <img 
-              src={imageUrl} 
-              alt={activity.title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-          </div>
-        ) : (
-          <div 
-            className="w-full aspect-video"
+    <div
+      ref={cardRef}
+      className={`transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+      }`}
+      style={{ transitionDelay: `${index * 80}ms` }}
+    >
+      <Link to={`/activity/${activity.id}`} className="group block h-full">
+        <Card className="h-full overflow-hidden transition-all duration-500 hover:-translate-y-3 bg-card relative"
+          style={{
+            boxShadow: "0 4px 16px hsl(var(--foreground) / 0.08)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = "0 12px 40px hsl(var(--foreground) / 0.12), 0 4px 12px hsl(var(--primary) / 0.2)";
+            e.currentTarget.style.transform = "translateY(-12px) scale(1.02)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = "0 4px 16px hsl(var(--foreground) / 0.08)";
+            e.currentTarget.style.transform = "";
+          }}
+        >
+          {/* Gradient Border Effect on Hover */}
+          <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{
-              background: activity.imageGradient,
+              background: "linear-gradient(135deg, hsl(var(--primary) / 0.3) 0%, transparent 50%, hsl(var(--primary) / 0.3) 100%)",
+              padding: "2px",
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMaskComposite: "xor",
+              maskComposite: "exclude",
             }}
           />
-        )}
-        
-        <CardContent className="p-6">
-          <div className="flex items-start justify-between gap-4 mb-3">
-            <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+          
+          {imageUrl ? (
+            <div className="w-full aspect-[4/3] overflow-hidden relative">
+              <ShimmerLoader />
+              <img 
+                src={imageUrl} 
+                alt={activity.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+              />
+              {/* Image Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Status Badge - Prominent Position */}
+              <div className="absolute top-4 right-4">
+                <StatusBadge status={activity.status} />
+              </div>
+            </div>
+          ) : (
+            <div 
+              className="w-full aspect-[4/3] relative"
+              style={{
+                background: activity.imageGradient,
+              }}
+            >
+              <div className="absolute top-4 right-4">
+                <StatusBadge status={activity.status} />
+              </div>
+            </div>
+          )}
+          
+          <CardContent className="p-8">
+            {/* Category Tag */}
+            {activity.category && (
+              <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full mb-3 uppercase tracking-wider">
+                {activity.category}
+              </span>
+            )}
+            
+            <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-3 leading-tight">
               {activity.title}
             </h3>
-            <StatusBadge status={activity.status} />
-          </div>
+            
+            <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300 leading-relaxed font-medium mb-5">
+              {activity.impact}
+            </p>
+            
+            {showProgress && (
+              <ProgressBar progress={activity.progress!} className="mb-4" />
+            )}
+          </CardContent>
           
-          <p className="text-muted-foreground font-medium mb-4">
-            {activity.impact}
-          </p>
-          
-          {showProgress && <ProgressBar progress={activity.progress!} />}
-        </CardContent>
-        
-        <CardFooter className="px-6 pb-6 pt-0">
-          <div className="flex items-center text-primary font-medium group-hover:gap-2 transition-all">
-            View Details
-            <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-          </div>
-        </CardFooter>
-      </Card>
-    </Link>
+          <CardFooter className="px-8 pb-8 pt-0">
+            <div className="flex items-center text-primary font-bold group-hover:gap-3 transition-all duration-300 text-base">
+              Explore Initiative
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+            </div>
+          </CardFooter>
+        </Card>
+      </Link>
+    </div>
   );
 };
 

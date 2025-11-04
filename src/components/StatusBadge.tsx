@@ -30,8 +30,11 @@ const StatusBadge = ({ status }: StatusBadgeProps) => {
   const Icon = config.icon;
 
   return (
-    <Badge variant={config.variant} className="gap-1.5 font-medium">
-      <Icon className="w-3.5 h-3.5" />
+    <Badge 
+      variant={config.variant} 
+      className="gap-2 font-bold text-sm px-4 py-2 shadow-lg transition-transform duration-300 hover:scale-105"
+    >
+      <Icon className="w-4 h-4" />
       {config.label}
     </Badge>
   );

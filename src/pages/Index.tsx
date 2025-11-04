@@ -57,16 +57,19 @@ const Index = () => {
               <ShareButtons title="JKKN Centenary" />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up">
-              {filteredActivities.map((activity) => (
-                <ActivityCard key={activity.id} activity={activity} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {filteredActivities.map((activity, index) => (
+                <ActivityCard key={activity.id} activity={activity} index={index} />
               ))}
             </div>
           </>
         )}
       </main>
       
-      <footer className="border-t border-border py-16 mt-20 bg-secondary/30">
+      <footer className="border-t-2 py-20 mt-24 relative overflow-hidden" style={{
+        borderImage: "linear-gradient(90deg, transparent, hsl(var(--primary)), transparent) 1",
+        background: "linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--secondary)) 100%)",
+      }}>
         <div className="container px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
             <div>

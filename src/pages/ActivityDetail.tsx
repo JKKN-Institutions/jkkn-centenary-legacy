@@ -50,26 +50,31 @@ const ActivityDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container px-6 py-12 max-w-4xl mx-auto">
-        <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-8 group">
-          <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-          Back to Activities
+      <div className="container px-6 py-16 max-w-5xl mx-auto">
+        <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-primary transition-all mb-10 group font-semibold">
+          <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-2 transition-transform" />
+          Back to All Initiatives
         </Link>
 
         <div className="animate-fade-in">
           {imageUrl ? (
-            <div className="w-full aspect-video rounded-lg mb-8 shadow-2xl overflow-hidden">
+            <div className="w-full aspect-[21/9] rounded-2xl mb-12 overflow-hidden relative" style={{
+              boxShadow: "0 20px 60px hsl(var(--foreground) / 0.15)"
+            }}>
               <img 
                 src={imageUrl} 
                 alt={activity.title}
                 className="w-full h-full object-cover"
+                loading="eager"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
           ) : (
             <div 
-              className="w-full aspect-video rounded-lg mb-8 shadow-lg"
+              className="w-full aspect-[21/9] rounded-2xl mb-12"
               style={{
                 background: activity.imageGradient,
+                boxShadow: "0 20px 60px hsl(var(--foreground) / 0.15)"
               }}
             />
           )}
@@ -82,10 +87,10 @@ const ActivityDetail = () => {
                 </Badge>
                 <StatusBadge status={activity.status} />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              <h1 className="text-4xl md:text-6xl font-extrabold text-foreground mb-6 leading-tight tracking-tight">
                 {activity.title}
               </h1>
-              <p className="text-xl font-semibold text-primary">
+              <p className="text-xl md:text-2xl font-bold text-primary leading-relaxed">
                 {activity.impact}
               </p>
             </div>
