@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ActivityDetail from "./pages/ActivityDetail";
-import NotFound from "./pages/NotFound";
+import NotFoundComponent from "./components/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +19,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/activity/:id" element={<ActivityDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFoundComponent />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
