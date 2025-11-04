@@ -8,6 +8,7 @@ import ProgressRing from "@/components/ProgressRing";
 import Timeline, { TimelineMilestone } from "@/components/Timeline";
 import RelatedActivities from "@/components/RelatedActivities";
 import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { allActivities } from "@/data/all-activities";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

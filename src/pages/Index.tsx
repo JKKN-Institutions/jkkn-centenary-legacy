@@ -1,10 +1,13 @@
 import { useState, useMemo } from "react";
 import Hero from "@/components/Hero";
 import ActivityCard from "@/components/ActivityCard";
+import ActivityCardSkeleton from "@/components/ActivityCardSkeleton";
 import FilterBar from "@/components/FilterBar";
 import StatsOverview from "@/components/StatsOverview";
 import ShareButtons from "@/components/ShareButtons";
+import NewsletterForm from "@/components/NewsletterForm";
 import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { allActivities, type Category } from "@/data/all-activities";
 import { ActivityStatus } from "@/components/StatusBadge";
 
@@ -12,6 +15,7 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
   const [selectedStatus, setSelectedStatus] = useState<ActivityStatus | "all">("all");
+  const [isLoading] = useState(false);
   
   const completed = allActivities.filter(a => a.status === "completed").length;
   const inProgress = allActivities.filter(a => a.status === "in-progress").length;
@@ -30,7 +34,24 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO />
+      <SEO 
+        keywords={["JKKN", "centenary", "education", "community service", "100 initiatives", "100 years"]}
+      />
+      
+      <StructuredData
+        data={{
+          "@type": "Organization",
+          name: "J.K.K. Nattraja Educational Institutions",
+          url: "https://jkkn-centenary.lovable.app",
+          description: "Celebrating 100 years of educational excellence through 100 meaningful initiatives",
+          foundingDate: "1925",
+          sameAs: [
+            "https://www.facebook.com/JKKN",
+            "https://twitter.com/JKKN",
+          ],
+        }}
+      />
+      
       <Hero />
       
       <a id="main-content" className="sr-only">Main Content</a>
@@ -47,7 +68,11 @@ const Index = () => {
       />
       
       <main className="container px-6 py-12" role="main" aria-label="Centenary initiatives">
-        {filteredActivities.length === 0 ? (
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <ActivityCardSkeleton count={6} />
+          </div>
+        ) : filteredActivities.length === 0 ? (
           <div className="text-center py-20" role="status" aria-live="polite">
             <h3 className="text-2xl font-semibold text-muted-foreground mb-2">
               No activities found
@@ -193,11 +218,11 @@ const Index = () => {
             
             {/* Connect */}
             <div>
-              <h4 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wider">Stay Connected</h4>
+              <h4 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wider">Stay Updated</h4>
               <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                Follow our centenary journey and celebrate with us.
+                Get the latest updates on our centenary initiatives.
               </p>
-              <ShareButtons title="JKKN Centenary: 100 Years, 100 Ways" />
+              <NewsletterForm variant="compact" />
             </div>
           </div>
           
