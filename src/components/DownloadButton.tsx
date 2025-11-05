@@ -35,11 +35,11 @@ const DownloadButton = ({ imageUrl, fileName = "activity-photo.jpg" }: DownloadB
   return (
     <Button
       variant="outline"
-      size="sm"
-      className="gap-2"
+      size="lg"
+      className="gap-2 border-2 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:shadow-lg hover:scale-105 font-bold"
       onClick={handleDownload}
     >
-      <Download className="w-4 h-4" />
+      <Download className="w-5 h-5" />
       Download Photo
     </Button>
   );
