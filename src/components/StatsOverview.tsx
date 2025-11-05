@@ -1,7 +1,7 @@
 import { CheckCircle2, Clock, Calendar, TrendingUp } from "lucide-react";
 import { allActivities } from "@/data/all-activities";
 import CounterAnimation from "./CounterAnimation";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 const StatsOverview = () => {
@@ -136,4 +136,4 @@ const StatsOverview = () => {
   );
 };
 
-export default StatsOverview;
+export default memo(StatsOverview);

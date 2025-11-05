@@ -8,10 +8,11 @@ import Index from "./pages/Index";
 import ActivityDetail from "./pages/ActivityDetail";
 import NotFoundComponent from "./components/NotFound";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
 
-// Route transition component
+// Route transition component with scroll to top
 const RouteTransition = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
 
@@ -30,16 +31,23 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <a href="#main-content" className="skip-to-content">
+          <a 
+            href="#main-content" 
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 font-bold"
+            aria-label="Skip to main content"
+          >
             Skip to main content
           </a>
           <RouteTransition>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/activity/:id" element={<ActivityDetail />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFoundComponent />} />
-            </Routes>
+            <div id="main-content">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/activity/:id" element={<ActivityDetail />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFoundComponent />} />
+              </Routes>
+            </div>
+            <Footer />
           </RouteTransition>
         </BrowserRouter>
       </TooltipProvider>

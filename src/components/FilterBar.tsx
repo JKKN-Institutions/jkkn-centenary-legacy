@@ -1,4 +1,4 @@
-import { Search, X } from "lucide-react";
+import { Search, X, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { categories, type Category } from "@/data/all-activities";
@@ -15,6 +15,7 @@ interface FilterBarProps {
   onCategoryChange: (value: Category) => void;
   selectedStatus: ActivityStatus | "all";
   onStatusChange: (value: ActivityStatus | "all") => void;
+  isLoading?: boolean;
 }
 
 const FilterBar = ({
@@ -24,6 +25,7 @@ const FilterBar = ({
   onCategoryChange,
   selectedStatus,
   onStatusChange,
+  isLoading = false,
 }: FilterBarProps) => {
   const { scrollDirection, isAtTop } = useScrollDirection();
   
@@ -58,13 +60,18 @@ const FilterBar = ({
           <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
             {/* Search Input */}
             <div className="relative flex-1 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none transition-all duration-300 group-focus-within:text-primary group-focus-within:scale-110" />
+              {isLoading ? (
+                <Loader2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary pointer-events-none animate-spin" />
+              ) : (
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none transition-all duration-300 group-focus-within:text-primary group-focus-within:scale-110" />
+              )}
               <Input
                 type="text"
                 placeholder="Search initiatives..."
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-12 h-12 text-base border-2 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 shadow-sm focus:shadow-lg"
+                disabled={isLoading}
+                className="pl-12 h-12 text-base border-2 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 shadow-sm focus:shadow-lg disabled:opacity-50"
                 style={{
                   boxShadow: searchQuery ? "0 0 0 3px hsl(var(--primary) / 0.1)" : undefined
                 }}

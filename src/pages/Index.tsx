@@ -62,10 +62,11 @@ const Index = () => {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-        selectedStatus={selectedStatus}
-        onStatusChange={setSelectedStatus}
-      />
+          onCategoryChange={setSelectedCategory}
+          selectedStatus={selectedStatus}
+          onStatusChange={setSelectedStatus}
+          isLoading={isLoading}
+        />
       
       <main className="container px-6 py-12" role="main" aria-label="Centenary initiatives">
         {isLoading ? (
