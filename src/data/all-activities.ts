@@ -18,6 +18,30 @@ export interface ExtendedActivity extends Activity {
   category: Category;
   progress?: number;
   image?: string;
+  dateCompleted?: string;
+  dateScheduled?: string;
+  metrics?: {
+    icon: string;
+    label: string;
+    value: string | number;
+  }[];
+  visionText?: string[];
+  galleryPhotos?: {
+    imageKey: string;
+    caption: string;
+  }[];
+  impactStats?: {
+    icon: string;
+    value: number;
+    label: string;
+    color?: string;
+  }[];
+  testimonials?: {
+    quote: string;
+    name: string;
+    role: string;
+    avatar?: string;
+  }[];
 }
 
 export const allActivities: ExtendedActivity[] = [
@@ -42,7 +66,48 @@ export const allActivities: ExtendedActivity[] = [
     category: "Community Service",
     progress: 100,
     image: "workers-honored",
-    description: "A heartfelt recognition ceremony celebrating the dedication and commitment of 100 workers who have been the backbone of JKKN's success."
+    description: "A heartfelt recognition ceremony celebrating the dedication and commitment of 100 workers who have been the backbone of JKKN's success.",
+    dateCompleted: "November 10, 2025",
+    metrics: [
+      { icon: "Users", label: "Workers", value: 100 },
+      { icon: "Package", label: "Uniform Pieces", value: 523 },
+      { icon: "Building", label: "Departments", value: 15 }
+    ],
+    visionText: [
+      "For the centenary, JKKN honored 100 campus workers with new uniforms, recognizing the hands that built and maintain our institutions. These are the people who wake up before dawn to ensure our campus is clean, safe, and welcoming for thousands of students every day.",
+      "From maintenance staff to security personnel, from gardeners to sanitation workers—each person received a complete uniform set featuring the JKKN centenary logo. This initiative wasn't just about clothing; it was about dignity, recognition, and belonging.",
+      "The ceremony was attended by college leadership, faculty, and students who expressed their gratitude to these unsung heroes. Many workers, some who have served for over 20 years, said it was the first time they felt truly seen and valued by the institution."
+    ],
+    galleryPhotos: [
+      { imageKey: "workers-honored", caption: "100 workers gathered for the recognition ceremony" },
+      { imageKey: "workers-honored", caption: "Workers proudly displaying their new uniforms with JKKN centenary logo" },
+      { imageKey: "workers-honored", caption: "Leadership team presenting uniform sets to senior staff members" },
+      { imageKey: "workers-honored", caption: "Maintenance team members in their new attire" },
+      { imageKey: "workers-honored", caption: "Security personnel honored for their dedication" },
+      { imageKey: "workers-honored", caption: "Group photo capturing the spirit of appreciation and unity" }
+    ],
+    impactStats: [
+      { icon: "Package", value: 523, label: "Uniform Pieces", color: "primary" },
+      { icon: "Users", value: 100, label: "Workers Honored", color: "success" },
+      { icon: "Building", value: 15, label: "Departments Covered", color: "info" }
+    ],
+    testimonials: [
+      {
+        quote: "I've worked here 20 years. This is the first time someone honored us like this. I feel like I'm truly part of JKKN now.",
+        name: "Murugan",
+        role: "Maintenance Staff"
+      },
+      {
+        quote: "These uniforms make us feel professional and proud. We're not just workers anymore—we're ambassadors of this great institution.",
+        name: "Lakshmi",
+        role: "Sanitation Department"
+      },
+      {
+        quote: "When they called my name on stage, my eyes filled with tears. After 15 years of service, this recognition means everything.",
+        name: "Ravi Kumar",
+        role: "Security Personnel"
+      }
+    ]
   },
   {
     id: "100-trees-planted",
@@ -53,7 +118,43 @@ export const allActivities: ExtendedActivity[] = [
     category: "Environment",
     progress: 73,
     image: "trees-planted",
-    description: "Creating a greener tomorrow by planting 100 trees across our campus and neighboring communities, ensuring a sustainable future for generations to come."
+    description: "Creating a greener tomorrow by planting 100 trees across our campus and neighboring communities, ensuring a sustainable future for generations to come.",
+    dateScheduled: "March 2025",
+    metrics: [
+      { icon: "TreePine", label: "Trees", value: "73 of 100" },
+      { icon: "MapPin", label: "Locations", value: 8 },
+      { icon: "Users", label: "Volunteers", value: 250 }
+    ],
+    visionText: [
+      "As part of our centenary celebrations, we're planting 100 native trees across campus and in local communities. So far, 73 trees have been planted, and we're on track to complete all 100 by March 2025.",
+      "Each tree represents a year of JKKN's legacy and a promise for a greener future. We've selected species that thrive in our climate, provide shade, and support local biodiversity. Students, faculty, and community members join us every weekend for planting drives.",
+      "This initiative goes beyond environmental impact—it's about creating living monuments that will grow with future generations of students, providing shade, clean air, and a reminder of our commitment to sustainability."
+    ],
+    galleryPhotos: [
+      { imageKey: "trees-planted", caption: "Students participating in tree planting drive" },
+      { imageKey: "trees-planted", caption: "Native saplings ready for planting" },
+      { imageKey: "trees-planted", caption: "Community members joining the green initiative" },
+      { imageKey: "trees-planted", caption: "Newly planted trees along campus pathway" },
+      { imageKey: "trees-planted", caption: "Faculty members watering young saplings" },
+      { imageKey: "trees-planted", caption: "Commemorative plaque marking the centenary plantation" }
+    ],
+    impactStats: [
+      { icon: "TreePine", value: 73, label: "Trees Planted", color: "success" },
+      { icon: "Users", value: 250, label: "Volunteers", color: "primary" },
+      { icon: "Leaf", value: 8, label: "Species Planted", color: "info" }
+    ],
+    testimonials: [
+      {
+        quote: "Planting these trees connects us to the campus in a permanent way. Long after we graduate, these trees will stand as our legacy.",
+        name: "Priya Sharma",
+        role: "Final Year Engineering Student"
+      },
+      {
+        quote: "It's wonderful to see students so enthusiastic about environmental conservation. This initiative inspires hope for our planet's future.",
+        name: "Dr. Anand",
+        role: "Environmental Science Faculty"
+      }
+    ]
   },
   {
     id: "100-scholarships",
@@ -64,7 +165,23 @@ export const allActivities: ExtendedActivity[] = [
     category: "Education",
     progress: 0,
     image: "scholarships",
-    description: "Empowering the next generation by providing 100 merit-based scholarships to exceptional students who demonstrate academic excellence and financial need."
+    description: "Empowering the next generation by providing 100 merit-based scholarships to exceptional students who demonstrate academic excellence and financial need.",
+    dateScheduled: "June 2025",
+    metrics: [
+      { icon: "GraduationCap", label: "Scholarships", value: 100 },
+      { icon: "IndianRupee", label: "Total Value", value: "₹50L" },
+      { icon: "Users", label: "Applicants Expected", value: "500+" }
+    ],
+    visionText: [
+      "In honor of our centenary, JKKN is launching 100 merit-cum-need-based scholarships worth ₹50,000 each. These scholarships will support talented students who face financial barriers to education, ensuring that economic circumstances never stand between a brilliant mind and quality education.",
+      "Applications will open in June 2025, with selections based on academic performance, financial need, and personal circumstances. Priority will be given to first-generation college students and those from rural backgrounds.",
+      "Each scholarship recipient will also receive mentorship from faculty and industry professionals, career guidance, and access to special workshops—investing not just in their education, but in their overall development and future success."
+    ],
+    impactStats: [
+      { icon: "GraduationCap", value: 100, label: "Scholarships", color: "primary" },
+      { icon: "IndianRupee", value: 50, label: "Lakhs Total Value", color: "success" },
+      { icon: "Award", value: 4, label: "Years of Support", color: "info" }
+    ]
   },
   {
     id: "100-books-donated",
