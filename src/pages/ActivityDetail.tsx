@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, Users, Target, TrendingUp, Heart, Award, MapPin, Clock } from "lucide-react";
+import { ArrowLeft, Calendar, Users, Target, TrendingUp } from "lucide-react";
 import StatusBadge from "@/components/StatusBadge";
 import ProgressBar from "@/components/ProgressBar";
 import ShareButtons from "@/components/ShareButtons";
@@ -8,11 +8,7 @@ import ProgressRing from "@/components/ProgressRing";
 import Timeline, { TimelineMilestone } from "@/components/Timeline";
 import RelatedActivities from "@/components/RelatedActivities";
 import SEO from "@/components/SEO";
-import StructuredData from "@/components/StructuredData";
-import ImageGallery from "@/components/ImageGallery";
-import NewsletterForm from "@/components/NewsletterForm";
 import { allActivities } from "@/data/all-activities";
-import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -95,41 +91,12 @@ const ActivityDetail = () => {
   const cta = getCTA();
   const CTAIcon = cta.icon;
 
-  // Gallery images
-  const galleryImages = imageUrl ? [
-    { src: imageUrl, alt: `${activity.title} - Main view`, caption: activity.impact },
-    { src: imageUrl, alt: `${activity.title} - Detail view`, caption: "Community impact in action" },
-    { src: imageUrl, alt: `${activity.title} - Behind the scenes`, caption: "Our team making it happen" },
-  ] : [];
-
-  // Structured Data
-  const structuredData = {
-    "@type": "Event",
-    name: activity.title,
-    description: activity.description,
-    startDate: "2024-01-01",
-    endDate: "2025-12-31",
-    location: {
-      "@type": "Place",
-      name: "J.K.K. Nattraja Educational Institutions",
-      address: "Komarapalayam, Tamil Nadu, India"
-    },
-    organizer: {
-      "@type": "Organization",
-      name: "J.K.K. Nattraja Educational Institutions",
-      url: "https://jkkn-centenary.lovable.app"
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <SEO 
         title={`${activity.title} - JKKN Centenary`}
-        description={activity.description || activity.impact}
-        type="article"
-        keywords={[activity.title, activity.category, "JKKN Centenary", "community service"]}
+        description={activity.impact}
       />
-      <StructuredData data={structuredData} />
       
       {/* Back Navigation */}
       <div className="container px-6 py-8">
@@ -230,48 +197,6 @@ const ActivityDetail = () => {
                 <Timeline milestones={milestones} />
               </div>
             )}
-
-            {/* Image Gallery */}
-            {galleryImages.length > 0 && (
-              <div>
-                <h2 className="text-3xl font-extrabold text-foreground mb-8 tracking-tight flex items-center gap-3">
-                  <Award className="w-8 h-8 text-primary" />
-                  Gallery
-                </h2>
-                <ImageGallery images={galleryImages} />
-              </div>
-            )}
-
-            {/* Community Impact Metrics */}
-            <div>
-              <h2 className="text-3xl font-extrabold text-foreground mb-8 tracking-tight flex items-center gap-3">
-                <Heart className="w-8 h-8 text-primary" />
-                Community Impact
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="text-center p-6 bg-primary/5 border-2 border-primary/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <CardContent className="p-0">
-                    <Users className="w-12 h-12 text-primary mx-auto mb-3" />
-                    <div className="text-3xl font-extrabold text-primary mb-1">100+</div>
-                    <div className="text-sm text-muted-foreground font-semibold">People Impacted</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center p-6 bg-success/5 border-2 border-success/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <CardContent className="p-0">
-                    <TrendingUp className="w-12 h-12 text-success mx-auto mb-3" />
-                    <div className="text-3xl font-extrabold text-success mb-1">{activity.progress || 0}%</div>
-                    <div className="text-sm text-muted-foreground font-semibold">Completed</div>
-                  </CardContent>
-                </Card>
-                <Card className="text-center p-6 bg-info/5 border-2 border-info/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <CardContent className="p-0">
-                    <Clock className="w-12 h-12 text-info mx-auto mb-3" />
-                    <div className="text-3xl font-extrabold text-info mb-1">2024-25</div>
-                    <div className="text-sm text-muted-foreground font-semibold">Timeline</div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
           </div>
 
           {/* Sidebar Column */}
@@ -351,25 +276,8 @@ const ActivityDetail = () => {
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className="my-16">
-          <Separator className="mb-12" />
-          <Card className="p-12 bg-gradient-to-br from-primary/5 via-background to-primary/5 border-2 border-primary/20 max-w-3xl mx-auto">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Subscribe to receive updates about our centenary initiatives and see how your community is making a difference.
-              </p>
-              <NewsletterForm />
-            </div>
-          </Card>
-        </div>
-
         {/* Related Activities Section */}
-        <div>
-          <Separator className="mb-12" />
-          <RelatedActivities activities={relatedActivities} currentActivityId={activity.id} />
-        </div>
+        <RelatedActivities activities={relatedActivities} currentActivityId={activity.id} />
       </main>
     </div>
   );

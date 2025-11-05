@@ -1,20 +1,12 @@
-import { useParallax } from "@/hooks/useParallax";
 import heroImage from "@/assets/hero-centenary.jpg";
 import ScrollIndicator from "./ScrollIndicator";
 
 const Hero = () => {
-  const parallaxOffset = useParallax({ speed: 0.5 });
-
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-      {/* Background Image with True Parallax Effect */}
+      {/* Background Image with Parallax Effect */}
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 overflow-hidden will-change-transform"
-          style={{
-            transform: `translateY(${parallaxOffset}px)`,
-          }}
-        >
+        <div className="absolute inset-0 overflow-hidden">
           <img 
             src={heroImage} 
             alt="JKKN Educational Institution celebrating 100 years of excellence" 
