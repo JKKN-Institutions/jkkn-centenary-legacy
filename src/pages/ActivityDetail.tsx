@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { allActivities } from "@/data/all-activities";
-import { ArrowLeft, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar, Users, Heart, BookOpen, Award, DollarSign, Target, TrendingUp, Zap, Star, Gift, LucideIcon } from "lucide-react";
 import StatusBadge from "@/components/StatusBadge";
 import ShareButtons from "@/components/ShareButtons";
 import PhotoGallery, { Photo } from "@/components/PhotoGallery";
@@ -33,6 +33,19 @@ const imageMap: Record<string, string> = {
   "benches-installed": benchesInstalledImg,
   "alumni-stories": alumniStoriesImg,
   "blood-donations": bloodDonationsImg,
+};
+
+const iconMap: Record<string, LucideIcon> = {
+  Users,
+  Heart,
+  BookOpen,
+  Award,
+  DollarSign,
+  Target,
+  TrendingUp,
+  Zap,
+  Star,
+  Gift,
 };
 
 const ActivityDetail = () => {
@@ -180,7 +193,7 @@ const ActivityDetail = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-4">
                 {activity.metrics?.map((metric, index) => {
-                  const IconComponent = require("lucide-react")[metric.icon];
+                  const IconComponent = iconMap[metric.icon];
                   return (
                     <div key={index} className="flex items-center gap-2 text-foreground bg-muted/50 px-4 py-2 rounded-full border border-border hover:border-primary/30 transition-colors duration-300">
                       {IconComponent && <IconComponent className="w-4 h-4 text-primary" />}
