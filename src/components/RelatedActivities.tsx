@@ -37,32 +37,41 @@ const RelatedActivities = ({ activities, currentActivityId }: RelatedActivitiesP
   if (relatedActivities.length === 0) return null;
 
   return (
-    <section className="mt-24 pt-16 border-t-2" style={{
+    <section className="mt-24 pt-20 border-t-2 relative" style={{
       borderImage: "linear-gradient(90deg, transparent, hsl(var(--primary)), transparent) 1"
     }}>
-      <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4 tracking-tight">
-        More Initiatives Like This
-      </h2>
-      <p className="text-lg text-muted-foreground mb-12">
-        Explore other impactful activities in this category
-      </p>
+      {/* Decorative Elements */}
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full bg-gradient-radial from-primary/20 to-transparent blur-2xl" />
+      
+      <div className="animate-fade-in-up">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight text-center">
+          More Initiatives Like This
+        </h2>
+        <p className="text-lg md:text-xl text-muted-foreground mb-16 text-center max-w-2xl mx-auto">
+          Explore other impactful activities creating lasting change in our community
+        </p>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {relatedActivities.map((activity) => {
+        {relatedActivities.map((activity, index) => {
           const imageUrl = activity.image ? imageMap[activity.image] : null;
           
           return (
             <Link 
               key={activity.id} 
               to={`/activity/${activity.id}`}
-              className="group block"
+              className="group block animate-fade-in-up"
+              style={{ 
+                animationDelay: `${index * 150}ms`,
+                animationFillMode: "backwards"
+              }}
             >
-              <Card className="overflow-hidden transition-all duration-500 hover:-translate-y-2 bg-card h-full"
+              <Card className="overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:scale-[1.02] bg-card h-full border-2 border-transparent hover:border-primary/20"
                 style={{
                   boxShadow: "0 4px 16px hsl(var(--foreground) / 0.08)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = "0 12px 40px hsl(var(--foreground) / 0.12), 0 4px 12px hsl(var(--primary) / 0.2)";
+                  e.currentTarget.style.boxShadow = "0 20px 60px hsl(var(--foreground) / 0.15), 0 8px 20px hsl(var(--primary) / 0.25)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.boxShadow = "0 4px 16px hsl(var(--foreground) / 0.08)";
@@ -108,9 +117,12 @@ const RelatedActivities = ({ activities, currentActivityId }: RelatedActivitiesP
                     {activity.impact}
                   </p>
                   
-                  <div className="flex items-center text-primary font-bold text-sm group-hover:gap-2 transition-all duration-300">
-                    View Details
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform duration-300" />
+                  <div className="flex items-center text-primary font-extrabold text-sm group-hover:gap-3 transition-all duration-300 group-hover:text-primary-dark">
+                    <span className="relative">
+                      View Details
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+                    </span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-300 group-hover:scale-110" />
                   </div>
                 </CardContent>
               </Card>

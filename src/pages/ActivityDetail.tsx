@@ -125,28 +125,29 @@ const ActivityDetail = () => {
           />
         </div>
 
-        {/* Back Button - Floating with Backdrop Blur */}
-        <Link to="/" className="absolute top-8 left-8 z-20 animate-fade-in-up">
+        {/* Back Button - Floating with Backdrop Blur - Enhanced */}
+        <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 z-20 animate-fade-in-up">
           <Button
-            variant="secondary"
+            variant="hero"
             size="lg"
-            className="backdrop-blur-xl bg-white/5 hover:bg-white/15 text-white border-white/10 hover:border-white/30 shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+            className="backdrop-blur-xl shadow-2xl transition-all duration-300 font-bold"
           >
             <ArrowLeft className="mr-2 h-5 w-5" />
-            Back to Activities
+            <span className="hidden sm:inline">Back to Activities</span>
+            <span className="sm:hidden">Back</span>
           </Button>
         </Link>
 
-        {/* Hero Content - Enhanced Typography */}
-        <div className="relative z-10 w-full px-6 md:px-8 pb-20 pt-40">
+        {/* Hero Content - Enhanced Typography with Mobile Optimization */}
+        <div className="relative z-10 w-full px-6 md:px-8 pb-16 md:pb-20 pt-32 md:pt-40">
           <div className="container max-w-6xl">
             <div className="animate-fade-in-up" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-8 tracking-tighter leading-[0.9] drop-shadow-2xl">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-6 md:mb-8 tracking-tighter leading-[0.9] drop-shadow-2xl">
                 {activity.title}
               </h1>
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "0.4s", animationFillMode: "backwards" }}>
-              <p className="text-xl md:text-3xl text-white/95 max-w-4xl leading-relaxed font-light tracking-wide drop-shadow-lg">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/95 max-w-4xl leading-relaxed font-light tracking-wide drop-shadow-lg">
                 {activity.description}
               </p>
             </div>
@@ -157,14 +158,14 @@ const ActivityDetail = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
       </section>
 
-      {/* Overview Section - Clean 3-Column */}
-      <section className="py-16 md:py-20 border-b border-border/50 bg-gradient-to-b from-card to-background relative overflow-hidden">
+      {/* Overview Section - Clean 3-Column with Mobile Optimization */}
+      <section className="py-12 md:py-16 lg:py-20 border-b border-border/50 bg-gradient-to-b from-card to-background relative overflow-hidden">
         {/* Decorative Background Elements */}
         <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
         
-        <div className="container max-w-6xl px-6 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0 md:divide-x divide-border">
+        <div className="container max-w-6xl px-6 md:px-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 md:divide-x divide-border">
             {/* Status */}
             <div className="flex flex-col items-center text-center px-6 animate-fade-in-up" style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}>
               <div className="text-xs font-extrabold text-muted-foreground uppercase tracking-widest mb-4 opacity-70">
@@ -328,28 +329,38 @@ const ActivityDetail = () => {
         </section>
       )}
 
-      {/* Share & Download Section - Call to Action */}
-      <section className="py-20 md:py-24 bg-gradient-to-br from-primary/10 via-primary/5 to-background border-y border-primary/20 relative overflow-hidden">
-        {/* Decorative Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
+      {/* Share & Download Section - Dramatic Call to Action */}
+      <section className="py-24 md:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-background border-y-2 border-primary/30 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 opacity-[0.07]">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
             backgroundSize: '40px 40px'
           }} />
         </div>
+        <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-radial from-primary/15 to-transparent blur-3xl animate-pulse-glow" />
+        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-gradient-radial from-primary-light/15 to-transparent blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }} />
         
-        <div className="container max-w-5xl px-6 md:px-12 relative z-10">
-          <div className="bg-card/80 backdrop-blur-sm rounded-3xl p-10 md:p-14 shadow-2xl border border-border/50 hover:shadow-[0_20px_80px_rgba(0,0,0,0.12)] transition-shadow duration-500">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="text-center md:text-left">
-                <h3 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3 tracking-tight">
+        <div className="container max-w-6xl px-6 md:px-12 relative z-10">
+          <div className="glass-strong rounded-[2rem] p-12 md:p-16 shadow-2xl border-2 border-primary/10 hover:border-primary/20 transition-all duration-700 hover:shadow-[0_30px_100px_rgba(0,0,0,0.15)] relative overflow-hidden group">
+            {/* Shimmer Effect on Hover */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+            
+            <div className="flex flex-col md:flex-row items-center justify-between gap-10 relative z-10">
+              <div className="text-center md:text-left flex-1 animate-fade-in-up">
+                <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-4">
+                  <span className="text-sm font-extrabold text-primary uppercase tracking-wider">
+                    Spread The Impact
+                  </span>
+                </div>
+                <h3 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight leading-tight">
                   Share This Initiative
                 </h3>
-                <p className="text-muted-foreground text-lg max-w-md">
-                  Help us spread the word about this impactful work and inspire others
+                <p className="text-muted-foreground text-lg md:text-xl max-w-xl leading-relaxed">
+                  Help us amplify this story and inspire others to create positive change in their communities
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-5">
                 <div className="animate-fade-in-scale" style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}>
                   <ShareButtons title={activity.title} />
                 </div>
@@ -367,8 +378,12 @@ const ActivityDetail = () => {
 
       {/* Related Activities */}
       {relatedActivities.length > 0 && (
-        <section className="py-20 bg-background">
-          <div className="container px-6">
+        <section className="py-24 md:py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 left-1/3 w-96 h-96 rounded-full bg-gradient-radial from-primary/5 to-transparent blur-3xl" />
+          <div className="absolute bottom-0 right-1/3 w-96 h-96 rounded-full bg-gradient-radial from-primary/5 to-transparent blur-3xl" />
+          
+          <div className="container px-6 relative z-10">
             <RelatedActivities activities={relatedActivities} currentActivityId={activity.id} />
           </div>
         </section>

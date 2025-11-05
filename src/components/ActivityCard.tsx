@@ -138,9 +138,12 @@ const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
           </CardContent>
           
           <CardFooter className="px-8 pb-8 pt-0">
-            <div className="flex items-center text-primary font-bold group-hover:gap-3 transition-all duration-300 text-base">
-              Explore Initiative
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+            <div className="flex items-center text-primary font-extrabold group-hover:gap-3 transition-all duration-300 text-base group-hover:text-primary-dark">
+              <span className="relative">
+                Explore Initiative
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+              </span>
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-3 transition-transform duration-300 group-hover:scale-110" />
             </div>
           </CardFooter>
         </Card>

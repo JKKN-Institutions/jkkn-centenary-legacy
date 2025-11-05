@@ -32,33 +32,43 @@ const Hero = () => {
         />
       </div>
       
-      {/* Content */}
-      <div className="container relative z-10 px-6 py-32 text-center">
-        <h1 
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-primary-foreground mb-8 animate-bounce-in tracking-tighter leading-none"
-          style={{
-            textShadow: '0 4px 12px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1)',
-          }}
-          role="heading"
-          aria-level={1}
-        >
-          JKKN CENTENARY
-        </h1>
-        <p 
-          className="text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground/95 mb-6 animate-fade-in-up tracking-tight" 
-          style={{ animationDelay: '0.3s', letterSpacing: '0.05em' }}
-        >
-          100 YEARS, 100 WAYS
-        </p>
-        <p 
-          className="text-lg md:text-xl lg:text-2xl text-primary-foreground/90 max-w-3xl mx-auto animate-fade-in-up leading-relaxed" 
-          style={{ 
-            animationDelay: '0.5s',
-            textShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-          }}
-        >
-          Celebrating a century of excellence, innovation, and service to humanity
-        </p>
+      {/* Content - Enhanced Typography */}
+      <div className="container relative z-10 px-6 py-32 md:py-40 text-center">
+        <div className="animate-bounce-in">
+          <h1 
+            className="text-6xl md:text-8xl lg:text-9xl font-extrabold text-primary-foreground mb-10 tracking-tighter leading-[0.85]"
+            style={{
+              textShadow: '0 6px 20px rgba(0, 0, 0, 0.3), 0 3px 8px rgba(0, 0, 0, 0.2)',
+            }}
+            role="heading"
+            aria-level={1}
+          >
+            JKKN CENTENARY
+          </h1>
+        </div>
+        
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
+          <p 
+            className="text-3xl md:text-5xl lg:text-7xl font-extrabold text-primary-foreground/95 mb-8 tracking-tight" 
+            style={{ 
+              letterSpacing: '0.03em',
+              textShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
+            }}
+          >
+            100 YEARS, 100 WAYS
+          </p>
+        </div>
+        
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
+          <p 
+            className="text-xl md:text-2xl lg:text-3xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed font-medium" 
+            style={{ 
+              textShadow: '0 3px 10px rgba(0, 0, 0, 0.2)',
+            }}
+          >
+            Celebrating a century of excellence, innovation, and service to humanity
+          </p>
+        </div>
       </div>
       
       {/* Scroll Indicator */}

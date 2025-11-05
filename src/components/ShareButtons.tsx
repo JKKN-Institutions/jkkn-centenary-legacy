@@ -46,27 +46,47 @@ const ShareButtons = ({ title, url }: ShareButtonsProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Share2 className="w-4 h-4" />
-          Share
+        <Button 
+          variant="glass" 
+          size="lg" 
+          className="gap-2 font-bold group"
+        >
+          <Share2 className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+          Share This Story
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuItem onClick={shareOnTwitter} className="gap-2">
-          <Twitter className="w-4 h-4" />
-          Twitter
+      <DropdownMenuContent 
+        align="end" 
+        className="w-56 p-2 glass-strong border-border/50 shadow-2xl"
+      >
+        <DropdownMenuItem 
+          onClick={shareOnTwitter} 
+          className="gap-3 p-3 rounded-lg cursor-pointer hover:bg-info/10 hover:text-info transition-all duration-200 group"
+        >
+          <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+          <span className="font-semibold">Share on Twitter</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={shareOnFacebook} className="gap-2">
-          <Facebook className="w-4 h-4" />
-          Facebook
+        <DropdownMenuItem 
+          onClick={shareOnFacebook} 
+          className="gap-3 p-3 rounded-lg cursor-pointer hover:bg-info/10 hover:text-info transition-all duration-200 group"
+        >
+          <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+          <span className="font-semibold">Share on Facebook</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={shareOnLinkedIn} className="gap-2">
-          <Linkedin className="w-4 h-4" />
-          LinkedIn
+        <DropdownMenuItem 
+          onClick={shareOnLinkedIn} 
+          className="gap-3 p-3 rounded-lg cursor-pointer hover:bg-info/10 hover:text-info transition-all duration-200 group"
+        >
+          <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+          <span className="font-semibold">Share on LinkedIn</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={copyToClipboard} className="gap-2">
-          <LinkIcon className="w-4 h-4" />
-          Copy Link
+        <div className="h-px bg-border/50 my-2" />
+        <DropdownMenuItem 
+          onClick={copyToClipboard} 
+          className="gap-3 p-3 rounded-lg cursor-pointer hover:bg-primary/10 hover:text-primary transition-all duration-200 group"
+        >
+          <LinkIcon className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+          <span className="font-semibold">Copy Link</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

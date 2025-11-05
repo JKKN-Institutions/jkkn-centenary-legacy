@@ -23,7 +23,10 @@ const CounterAnimation = ({ end, duration = 1500, suffix = "", prefix = "", clas
   }, [isVisible, hasAnimated]);
 
   return (
-    <span ref={ref} className={className}>
+    <span 
+      ref={ref} 
+      className={`tabular-nums ${className} ${hasAnimated ? 'animate-count-up' : ''}`}
+    >
       {prefix}{count}{suffix}
     </span>
   );

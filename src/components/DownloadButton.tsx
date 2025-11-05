@@ -1,4 +1,4 @@
-import { Download } from "lucide-react";
+import { Download, Image } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
@@ -34,13 +34,13 @@ const DownloadButton = ({ imageUrl, fileName = "activity-photo.jpg" }: DownloadB
 
   return (
     <Button
-      variant="outline"
-      size="lg"
-      className="gap-2 border-2 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:shadow-lg hover:scale-105 font-bold"
       onClick={handleDownload}
+      variant="glass"
+      size="lg"
+      className="gap-2 font-bold group"
     >
-      <Download className="w-5 h-5" />
-      Download Photo
+      <Download className="w-5 h-5 group-hover:animate-bounce" />
+      Download Photos
     </Button>
   );
 };

@@ -74,11 +74,11 @@ const ProgressRing = ({
       </svg>
       
       {showLabel && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-extrabold bg-gradient-to-br from-primary via-primary to-primary-dark bg-clip-text text-transparent tabular-nums">
+        <div className="absolute inset-0 flex flex-col items-center justify-center animate-fade-in-scale">
+          <span className="text-3xl md:text-4xl font-extrabold bg-gradient-to-br from-primary via-primary-light to-primary-dark bg-clip-text text-transparent tabular-nums drop-shadow-sm">
             {Math.round(animatedProgress)}%
           </span>
-          <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wide mt-1">
+          <span className="text-xs text-muted-foreground font-extrabold uppercase tracking-widest mt-1 opacity-70">
             Complete
           </span>
         </div>
