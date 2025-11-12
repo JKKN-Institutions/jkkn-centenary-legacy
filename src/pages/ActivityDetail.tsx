@@ -38,10 +38,10 @@ const ActivityDetail = () => {
   const impactRef = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
 
-  const visionVisible = useIntersectionObserver(visionRef, { threshold: 0.2 });
-  const galleryVisible = useIntersectionObserver(galleryRef, { threshold: 0.1 });
-  const impactVisible = useIntersectionObserver(impactRef, { threshold: 0.2 });
-  const testimonialsVisible = useIntersectionObserver(testimonialsRef, { threshold: 0.1 });
+  const visionVisible = useIntersectionObserver(visionRef, { threshold: 0.1 });
+  const galleryVisible = useIntersectionObserver(galleryRef, { threshold: 0.05 });
+  const impactVisible = useIntersectionObserver(impactRef, { threshold: 0.1 });
+  const testimonialsVisible = useIntersectionObserver(testimonialsRef, { threshold: 0.05 });
 
   // Handle loading state
   if (isLoading) {
@@ -218,16 +218,14 @@ const ActivityDetail = () => {
       {/* The Vision Section - Rich Typography */}
       <section
         ref={visionRef}
-        className={`py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background via-secondary/10 to-background relative overflow-hidden transition-all duration-1000 ${
-          visionVisible ? 'opacity-100' : 'opacity-0'
-        }`}
+        className="py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background via-secondary/10 to-background relative overflow-hidden"
       >
         {/* Decorative Elements */}
         <div className="absolute top-20 right-10 w-[500px] h-[500px] rounded-full bg-gradient-radial from-primary/10 to-transparent blur-3xl" />
         <div className="absolute bottom-20 left-10 w-[500px] h-[500px] rounded-full bg-gradient-radial from-primary/10 to-transparent blur-3xl" />
 
         <div className="container max-w-5xl px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
-          <div className={`transition-all duration-1000 delay-200 ${visionVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-8 sm:mb-10 md:mb-12 tracking-tight text-center bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text">
               The Vision
             </h2>
@@ -236,20 +234,14 @@ const ActivityDetail = () => {
           <div className="space-y-6 sm:space-y-8">
             {activity.visionText ? (
               activity.visionText.map((paragraph, index) => (
-                <div
-                  key={index}
-                  className={`transition-all duration-1000 ${visionVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                  style={{
-                    transitionDelay: `${400 + index * 150}ms`,
-                  }}
-                >
+                <div key={index}>
                   <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/85 leading-relaxed font-light tracking-wide text-center max-w-4xl mx-auto">
                     {paragraph}
                   </p>
                 </div>
               ))
             ) : (
-              <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/85 leading-relaxed font-light tracking-wide text-center transition-all duration-1000 ${visionVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/85 leading-relaxed font-light tracking-wide text-center">
                 {activity.description}
               </p>
             )}
@@ -261,12 +253,10 @@ const ActivityDetail = () => {
       {galleryPhotosWithUrls.length > 0 && (
         <section
           ref={galleryRef}
-          className={`py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background to-muted/30 transition-all duration-1000 ${
-            galleryVisible ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background to-muted/30"
         >
           <div className="container max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
-            <div className={`transition-all duration-1000 delay-200 ${galleryVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-10 sm:mb-12 md:mb-16 tracking-tight text-center">
                 Photo Gallery
               </h2>
@@ -280,9 +270,7 @@ const ActivityDetail = () => {
       {activity.impactStats && activity.impactStats.length > 0 && (
         <section
           ref={impactRef}
-          className={`py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-primary/5 via-background to-background relative overflow-hidden transition-all duration-1000 ${
-            impactVisible ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-primary/5 via-background to-background relative overflow-hidden"
         >
           {/* Animated Background Orbs */}
           <div className="absolute inset-0 opacity-20">
@@ -291,7 +279,7 @@ const ActivityDetail = () => {
           </div>
 
           <div className="container max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
-            <div className={`transition-all duration-1000 delay-200 ${impactVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-3 sm:mb-4 tracking-tight text-center">
                 Impact by the Numbers
               </h2>
@@ -308,12 +296,10 @@ const ActivityDetail = () => {
       {activity.testimonials && activity.testimonials.length > 0 && (
         <section
           ref={testimonialsRef}
-          className={`py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background to-secondary/20 transition-all duration-1000 ${
-            testimonialsVisible ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background to-secondary/20"
         >
           <div className="container max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
-            <div className={`transition-all duration-1000 delay-200 ${testimonialsVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-3 sm:mb-4 tracking-tight text-center">
                 Voices of Impact
               </h2>
@@ -323,11 +309,7 @@ const ActivityDetail = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {activity.testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className={`transition-all duration-700 ${testimonialsVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                  style={{ transitionDelay: `${400 + index * 150}ms` }}
-                >
+                <div key={index}>
                   <TestimonialCard testimonial={testimonial} />
                 </div>
               ))}

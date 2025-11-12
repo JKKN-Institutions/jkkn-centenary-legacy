@@ -9,6 +9,7 @@ import ShimmerLoader from "@/components/ShimmerLoader";
 import { type Category } from "@/data/all-activities";
 import { ActivityStatus } from "@/components/StatusBadge";
 import { useActivities } from "@/hooks/useActivities";
+import { Shield } from "lucide-react";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -258,6 +259,20 @@ const Index = () => {
               <p className="text-xs sm:text-sm text-muted-foreground text-center md:text-left">
                 © {new Date().getFullYear()} J.K.K. Nattraja Educational Institutions. All rights reserved.
               </p>
+
+              {/* Admin Link */}
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://jkkn-dental-college.vercel.app/auth/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-bold text-muted-foreground hover:text-primary transition-all duration-300 rounded-lg hover:bg-primary/5 border border-transparent hover:border-primary/20"
+                >
+                  <Shield className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                  <span>Admin Panel</span>
+                </a>
+              </div>
+
               <p className="text-xs sm:text-sm font-semibold text-muted-foreground text-center md:text-right">
                 <span className="text-primary">1925-2025</span> • Empowering Generations • Building Futures
               </p>
