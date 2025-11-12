@@ -116,7 +116,7 @@ const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
             </div>
           )}
           
-          <CardContent className="p-8">
+          <CardContent className="p-5 sm:p-6 md:p-8">
             {/* Category Tag */}
             {activity.category && (
               <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full mb-3 uppercase tracking-wider">
@@ -124,11 +124,11 @@ const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
               </span>
             )}
             
-            <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-3 leading-tight">
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-2 sm:mb-3 leading-tight">
               {activity.title}
             </h3>
             
-            <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300 leading-relaxed font-medium mb-5">
+            <p className="text-sm sm:text-base text-muted-foreground group-hover:text-foreground transition-colors duration-300 leading-relaxed font-medium mb-4 sm:mb-5">
               {activity.impact}
             </p>
             
@@ -137,8 +137,8 @@ const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
             )}
           </CardContent>
           
-          <CardFooter className="px-8 pb-8 pt-0">
-            <div className="flex items-center text-primary font-extrabold group-hover:gap-3 transition-all duration-300 text-base group-hover:text-primary-dark">
+          <CardFooter className="px-5 sm:px-6 md:px-8 pb-5 sm:pb-6 md:pb-8 pt-0">
+            <div className="flex items-center text-primary font-extrabold group-hover:gap-3 transition-all duration-300 text-sm sm:text-base group-hover:text-primary-dark">
               <span className="relative">
                 Explore Initiative
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />

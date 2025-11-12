@@ -3,7 +3,7 @@ import ScrollIndicator from "./ScrollIndicator";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[70vh] sm:min-h-[75vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Parallax Effect */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 overflow-hidden">
@@ -33,10 +33,10 @@ const Hero = () => {
       </div>
       
       {/* Content - Enhanced Typography */}
-      <div className="container relative z-10 px-6 py-32 md:py-40 text-center">
+      <div className="container relative z-10 px-4 sm:px-6 py-20 sm:py-28 md:py-40 text-center">
         <div className="animate-bounce-in">
           <h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-extrabold text-primary-foreground mb-10 tracking-tighter leading-[0.85]"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-extrabold text-primary-foreground mb-6 sm:mb-8 md:mb-10 tracking-tighter leading-[0.9] sm:leading-[0.85]"
             style={{
               textShadow: '0 6px 20px rgba(0, 0, 0, 0.3), 0 3px 8px rgba(0, 0, 0, 0.2)',
             }}
@@ -49,7 +49,7 @@ const Hero = () => {
         
         <div className="animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'backwards' }}>
           <p 
-            className="text-3xl md:text-5xl lg:text-7xl font-extrabold text-primary-foreground/95 mb-8 tracking-tight" 
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-extrabold text-primary-foreground/95 mb-4 sm:mb-6 md:mb-8 tracking-tight"
             style={{ 
               letterSpacing: '0.03em',
               textShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
@@ -61,7 +61,7 @@ const Hero = () => {
         
         <div className="animate-fade-in-up" style={{ animationDelay: '0.5s', animationFillMode: 'backwards' }}>
           <p 
-            className="text-xl md:text-2xl lg:text-3xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed font-medium" 
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed font-medium px-2"
             style={{ 
               textShadow: '0 3px 10px rgba(0, 0, 0, 0.2)',
             }}

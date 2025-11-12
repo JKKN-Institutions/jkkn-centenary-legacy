@@ -44,11 +44,11 @@ const StatsOverview = () => {
   ];
 
   return (
-    <div ref={sectionRef} className="container px-6 py-24 md:py-32">
+    <div ref={sectionRef} className="container px-4 sm:px-6 py-16 sm:py-20 md:py-32">
       {/* Hero Stat - Overall Progress */}
-      <div className="mb-16 flex justify-center">
+      <div className="mb-10 sm:mb-12 md:mb-16 flex justify-center">
         <div
-          className={`relative bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-3xl p-14 md:p-16 border-2 transition-all duration-700 max-w-xl w-full hover:scale-105 group ${
+          className={`relative bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-16 border-2 transition-all duration-700 max-w-xl w-full hover:scale-105 group ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
           style={{
@@ -71,19 +71,19 @@ const StatsOverview = () => {
           />
           
           <div className="relative z-10 text-center">
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-primary to-primary-light mb-8 shadow-2xl group-hover:scale-110 transition-transform duration-500">
-              <TrendingUp className="w-12 h-12 text-primary-foreground group-hover:rotate-12 transition-transform duration-500" />
+            <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary to-primary-light mb-4 sm:mb-6 md:mb-8 shadow-2xl group-hover:scale-110 transition-transform duration-500">
+              <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-primary-foreground group-hover:rotate-12 transition-transform duration-500" />
             </div>
             
-            <div className="text-8xl md:text-9xl font-extrabold bg-gradient-to-br from-primary via-primary-light to-primary-dark bg-clip-text text-transparent mb-4 tracking-tighter">
+            <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold bg-gradient-to-br from-primary via-primary-light to-primary-dark bg-clip-text text-transparent mb-3 sm:mb-4 tracking-tighter">
               <CounterAnimation end={totalProgress} suffix="%" duration={2000} />
             </div>
             
-            <div className="text-xl md:text-2xl font-extrabold text-foreground tracking-wider uppercase mb-2">
+            <div className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground tracking-wider uppercase mb-1 sm:mb-2">
               Overall Progress
             </div>
             
-            <div className="text-base text-muted-foreground font-semibold mb-8">
+            <div className="text-sm sm:text-base text-muted-foreground font-semibold mb-6 sm:mb-8">
               Toward our centenary celebration
             </div>
             
@@ -105,13 +105,13 @@ const StatsOverview = () => {
       </div>
 
       {/* Supporting Stats Row - Enhanced */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
         {supportingStats.map((stat, index) => {
           const Icon = stat.icon;
           return (
             <div
               key={index}
-              className={`group bg-card rounded-2xl p-10 border-2 ${stat.borderColor} hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:scale-105 ${
+              className={`group bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10 border-2 ${stat.borderColor} hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 md:hover:-translate-y-3 hover:scale-105 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{
@@ -125,10 +125,10 @@ const StatsOverview = () => {
                 e.currentTarget.style.boxShadow = "0 6px 24px hsl(var(--foreground) / 0.08)";
               }}
             >
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
                 {/* Enhanced Animated Icon Orb */}
                 <div
-                  className={`relative ${stat.bgColor} w-20 h-20 rounded-2xl flex items-center justify-center group-hover:scale-125 group-hover:rotate-6 transition-all duration-500 shadow-lg`}
+                  className={`relative ${stat.bgColor} w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:scale-125 group-hover:rotate-6 transition-all duration-500 shadow-lg`}
                   style={{
                     boxShadow: `0 0 0 0 ${stat.color.replace("text-", "hsl(var(--")})`,
                   }}
@@ -139,14 +139,14 @@ const StatsOverview = () => {
                       background: `radial-gradient(circle, ${stat.color.replace("text-", "hsl(var(--")} / 0.4) 0%, transparent 70%)`,
                     }}
                   />
-                  <Icon className={`w-10 h-10 ${stat.color} relative z-10 group-hover:scale-110 transition-transform duration-500`} />
+                  <Icon className={`w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 ${stat.color} relative z-10 group-hover:scale-110 transition-transform duration-500`} />
                 </div>
 
                 <div className="flex-1">
-                  <div className={`text-5xl md:text-6xl font-extrabold ${stat.color} mb-2 tabular-nums tracking-tighter`}>
+                  <div className={`text-4xl sm:text-5xl md:text-6xl font-extrabold ${stat.color} mb-1 sm:mb-2 tabular-nums tracking-tighter`}>
                     <CounterAnimation end={stat.value} duration={1500} />
                   </div>
-                  <div className="text-sm md:text-base text-muted-foreground font-extrabold uppercase tracking-widest group-hover:text-foreground transition-colors duration-300">
+                  <div className="text-xs sm:text-sm md:text-base text-muted-foreground font-extrabold uppercase tracking-wider sm:tracking-widest group-hover:text-foreground transition-colors duration-300">
                     {stat.label}
                   </div>
                 </div>

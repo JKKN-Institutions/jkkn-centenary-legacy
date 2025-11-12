@@ -54,8 +54,8 @@ const FilterBar = ({
           borderImage: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), transparent) 1"
         }}
       >
-        <div className="container px-6 py-8">
-          <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
+        <div className="container px-4 sm:px-6 py-4 sm:py-6 md:py-8">
+          <div className="flex flex-col md:flex-row gap-3 sm:gap-4 items-stretch md:items-center">
             {/* Search Input */}
             <div className="relative flex-1 group">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none transition-all duration-300 group-focus-within:text-primary group-focus-within:scale-110" />
@@ -64,7 +64,7 @@ const FilterBar = ({
                 placeholder="Search initiatives..."
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-12 h-12 text-base border-2 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 shadow-sm focus:shadow-lg"
+                className="pl-10 sm:pl-12 h-10 sm:h-12 text-sm sm:text-base border-2 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 shadow-sm focus:shadow-lg"
                 style={{
                   boxShadow: searchQuery ? "0 0 0 3px hsl(var(--primary) / 0.1)" : undefined
                 }}
@@ -73,7 +73,7 @@ const FilterBar = ({
 
             {/* Category Filter */}
             <Select value={selectedCategory} onValueChange={(value) => onCategoryChange(value as Category)}>
-              <SelectTrigger className="w-full md:w-56 h-12 border-2 hover:border-primary/50 transition-all duration-300 focus:bg-primary/10 focus:border-primary shadow-sm">
+              <SelectTrigger className="w-full md:w-56 h-10 sm:h-12 text-sm sm:text-base border-2 hover:border-primary/50 transition-all duration-300 focus:bg-primary/10 focus:border-primary shadow-sm">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
@@ -88,7 +88,7 @@ const FilterBar = ({
 
             {/* Status Filter */}
             <Select value={selectedStatus} onValueChange={(value) => onStatusChange(value as ActivityStatus | "all")}>
-              <SelectTrigger className="w-full md:w-56 h-12 border-2 hover:border-primary/50 transition-all duration-300 focus:bg-primary/10 focus:border-primary shadow-sm">
+              <SelectTrigger className="w-full md:w-56 h-10 sm:h-12 text-sm sm:text-base border-2 hover:border-primary/50 transition-all duration-300 focus:bg-primary/10 focus:border-primary shadow-sm">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
@@ -104,7 +104,7 @@ const FilterBar = ({
               <Button
                 variant="outline"
                 onClick={clearFilters}
-                className="h-12 px-6 border-2 hover:bg-destructive/10 hover:border-destructive/50 hover:text-destructive transition-all duration-300 shadow-sm"
+                className="h-10 sm:h-12 px-4 sm:px-6 text-sm sm:text-base border-2 hover:bg-destructive/10 hover:border-destructive/50 hover:text-destructive transition-all duration-300 shadow-sm"
               >
                 <X className="w-4 h-4 mr-2" />
                 Clear All
@@ -154,13 +154,13 @@ const FilterBar = ({
       {!shouldShow && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed top-4 right-4 z-50 h-12 px-6 bg-primary text-primary-foreground rounded-full shadow-2xl hover:shadow-primary/50 hover:scale-105 transition-all duration-300 flex items-center gap-3 font-bold animate-bounce-in"
+          className="fixed top-4 right-4 z-50 h-10 sm:h-12 px-4 sm:px-6 bg-primary text-primary-foreground rounded-full shadow-2xl hover:shadow-primary/50 hover:scale-105 transition-all duration-300 flex items-center gap-2 sm:gap-3 text-sm sm:text-base font-bold animate-bounce-in"
           style={{
             boxShadow: "0 8px 32px hsl(var(--primary) / 0.4)"
           }}
         >
-          <Search className="w-5 h-5" />
-          <span>Filters</span>
+          <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span className="hidden xs:inline">Filters</span>
         </button>
       )}
     </>

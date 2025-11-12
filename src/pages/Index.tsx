@@ -46,10 +46,10 @@ const Index = () => {
         onStatusChange={setSelectedStatus}
       />
       
-      <main className="container px-6 py-12" role="main" aria-label="Centenary initiatives">
+      <main className="container px-4 sm:px-6 py-8 sm:py-10 md:py-12" role="main" aria-label="Centenary initiatives">
         {filteredActivities.length === 0 ? (
-          <div className="text-center py-20" role="status" aria-live="polite">
-            <h3 className="text-2xl font-semibold text-muted-foreground mb-2">
+          <div className="text-center py-12 sm:py-16 md:py-20" role="status" aria-live="polite">
+            <h3 className="text-xl sm:text-2xl font-semibold text-muted-foreground mb-2">
               No activities found
             </h3>
             <p className="text-muted-foreground">
@@ -58,14 +58,14 @@ const Index = () => {
           </div>
         ) : (
           <>
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-semibold text-foreground" role="status" aria-live="polite">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold text-foreground" role="status" aria-live="polite">
                 {filteredActivities.length} {filteredActivities.length === 1 ? 'Activity' : 'Activities'}
               </h2>
               <ShareButtons title="JKKN Centenary" />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" role="list" aria-label="List of centenary initiatives">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10" role="list" aria-label="List of centenary initiatives">
               {filteredActivities.map((activity, index) => (
                 <ActivityCard key={activity.id} activity={activity} index={index} />
               ))}
@@ -74,7 +74,7 @@ const Index = () => {
         )}
       </main>
       
-      <footer className="border-t-2 py-20 mt-24 relative overflow-hidden" role="contentinfo" aria-label="Footer" style={{
+      <footer className="border-t-2 py-12 sm:py-16 md:py-20 mt-12 sm:mt-16 md:mt-24 relative overflow-hidden" role="contentinfo" aria-label="Footer" style={{
         borderImage: "linear-gradient(90deg, transparent, hsl(var(--primary)), transparent) 1",
         background: "linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--secondary)/0.3) 50%, hsl(var(--primary)/0.05) 100%)",
       }}>
@@ -86,46 +86,46 @@ const Index = () => {
           style={{ background: "radial-gradient(circle, hsl(var(--primary-light)) 0%, transparent 70%)" }}
         />
         
-        <div className="container px-6 relative z-10">
+        <div className="container px-4 sm:px-6 relative z-10">
           {/* Centenary Timeline */}
-          <div className="text-center mb-16">
-            <h3 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6 tracking-tight">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground mb-4 sm:mb-6 tracking-tight">
               A Century of Excellence
             </h3>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 mb-8">
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-16 mb-6 sm:mb-8">
               <div className="text-center">
-                <div className="text-5xl md:text-6xl font-extrabold bg-gradient-to-br from-primary via-primary to-primary-dark bg-clip-text text-transparent">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-br from-primary via-primary to-primary-dark bg-clip-text text-transparent">
                   1925
                 </div>
-                <div className="text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-2">Founded</div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-1 sm:mt-2">Founded</div>
               </div>
               
-              <div className="hidden md:block w-24 h-1 bg-gradient-to-r from-primary via-primary-light to-primary-glow rounded-full" />
+              <div className="hidden sm:block w-12 md:w-24 h-0.5 md:h-1 bg-gradient-to-r from-primary via-primary-light to-primary-glow rounded-full" />
               
               <div className="text-center">
-                <div className="text-5xl md:text-6xl font-extrabold bg-gradient-to-br from-primary via-primary-light to-primary-glow bg-clip-text text-transparent">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-br from-primary via-primary-light to-primary-glow bg-clip-text text-transparent">
                   100
                 </div>
-                <div className="text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-2">Years</div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-1 sm:mt-2">Years</div>
               </div>
               
-              <div className="hidden md:block w-24 h-1 bg-gradient-to-r from-primary-glow via-primary-light to-primary rounded-full" />
+              <div className="hidden sm:block w-12 md:w-24 h-0.5 md:h-1 bg-gradient-to-r from-primary-glow via-primary-light to-primary rounded-full" />
               
               <div className="text-center">
-                <div className="text-5xl md:text-6xl font-extrabold bg-gradient-to-br from-primary-dark via-primary to-primary-light bg-clip-text text-transparent">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-br from-primary-dark via-primary to-primary-light bg-clip-text text-transparent">
                   2025
                 </div>
-                <div className="text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-2">Centenary</div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-1 sm:mt-2">Centenary</div>
               </div>
             </div>
             
             {/* Progress Indicator */}
-            <div className="max-w-2xl mx-auto">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-bold text-foreground">Centenary Initiatives</span>
-                <span className="text-sm font-bold text-primary">{completed} of 100 Completed</span>
+            <div className="max-w-2xl mx-auto px-2">
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
+                <span className="text-xs sm:text-sm font-bold text-foreground">Centenary Initiatives</span>
+                <span className="text-xs sm:text-sm font-bold text-primary">{completed} of 100 Completed</span>
               </div>
-              <div className="h-4 bg-muted rounded-full overflow-hidden" style={{
+              <div className="h-3 sm:h-4 bg-muted rounded-full overflow-hidden" style={{
                 boxShadow: "inset 0 2px 8px hsl(var(--foreground) / 0.1)"
               }}>
                 <div 
@@ -140,8 +140,8 @@ const Index = () => {
           </div>
 
           {/* Inspirational Quote */}
-          <div className="max-w-3xl mx-auto text-center mb-16 py-12 px-8 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 border border-primary/10">
-            <blockquote className="text-xl md:text-2xl text-foreground/90 italic leading-relaxed mb-4">
+          <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-12 md:mb-16 py-8 sm:py-10 md:py-12 px-4 sm:px-6 md:px-8 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 border border-primary/10">
+            <blockquote className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/90 italic leading-relaxed mb-3 sm:mb-4">
               "Education is the most powerful weapon which you can use to change the world."
             </blockquote>
             <cite className="text-sm text-muted-foreground font-semibold uppercase tracking-wider not-italic">
@@ -150,13 +150,13 @@ const Index = () => {
           </div>
 
           {/* Footer Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
             {/* Logo Section */}
-            <div className="md:col-span-1">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center mb-4 shadow-lg">
-                <span className="text-3xl font-extrabold text-white">JK</span>
+            <div className="sm:col-span-2 md:col-span-1">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center mb-3 sm:mb-4 shadow-lg">
+                <span className="text-2xl sm:text-3xl font-extrabold text-white">JK</span>
               </div>
-              <h3 className="text-lg font-bold text-foreground mb-2">
+              <h3 className="text-base sm:text-lg font-bold text-foreground mb-1 sm:mb-2">
                 JKKN Centenary
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -202,12 +202,12 @@ const Index = () => {
           </div>
           
           {/* Bottom Bar */}
-          <div className="pt-8 border-t border-border">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-muted-foreground text-center md:text-left">
+          <div className="pt-6 sm:pt-8 border-t border-border">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
+              <p className="text-xs sm:text-sm text-muted-foreground text-center md:text-left">
                 © {new Date().getFullYear()} J.K.K. Nattraja Educational Institutions. All rights reserved.
               </p>
-              <p className="text-sm font-semibold text-muted-foreground text-center md:text-right">
+              <p className="text-xs sm:text-sm font-semibold text-muted-foreground text-center md:text-right">
                 <span className="text-primary">1925-2025</span> • Empowering Generations • Building Futures
               </p>
             </div>
