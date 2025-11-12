@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import StatusBadge, { ActivityStatus } from "./StatusBadge";
 import ProgressBar from "./ProgressBar";
 import { ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import ShimmerLoader from "./ShimmerLoader";
 
@@ -30,6 +30,8 @@ const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
   const isVisible = useIntersectionObserver(cardRef, { threshold: 0.1 });
   const imageUrl = activity.hero_image_url || null;
   const showProgress = activity.status === "in-progress" && activity.progress !== undefined;
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   
   return (
     <article
@@ -66,19 +68,46 @@ const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
           />
           
           {imageUrl ? (
-            <div className="w-full aspect-[4/3] overflow-hidden relative">
-              <ShimmerLoader />
-              <img 
-                src={imageUrl} 
-                alt={activity.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
+            <div className="w-full aspect-[4/3] overflow-hidden relative bg-muted">
+              {/* Show shimmer only while image is loading */}
+              {!imageLoaded && !imageError && (
+                <div className="absolute inset-0">
+                  <ShimmerLoader />
+                </div>
+              )}
+
+              {/* Image */}
+              {!imageError && (
+                <img
+                  src={imageUrl}
+                  alt={activity.title}
+                  className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  loading="lazy"
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => {
+                    setImageError(true);
+                    setImageLoaded(false);
+                  }}
+                />
+              )}
+
+              {/* Fallback gradient if image fails to load */}
+              {imageError && (
+                <div
+                  className="w-full h-full"
+                  style={{
+                    background: activity.imageGradient,
+                  }}
+                />
+              )}
+
               {/* Image Overlay Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               {/* Status Badge - Prominent Position */}
-              <div className="absolute top-4 right-4">
+              <div className="absolute top-4 right-4 z-10">
                 <StatusBadge status={activity.status} />
               </div>
             </div>

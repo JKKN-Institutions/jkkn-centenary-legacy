@@ -1,18 +1,8 @@
 import { Activity } from "@/components/ActivityCard";
 
-export const categories = [
-  "All",
-  "Community Service",
-  "Education",
-  "Environment",
-  "Health & Wellness",
-  "Infrastructure",
-  "Culture & Heritage",
-  "Technology",
-  "Sports & Recreation"
-] as const;
-
-export type Category = typeof categories[number];
+// Categories are now fetched dynamically from Supabase
+// This type is kept flexible to accommodate any category from the database
+export type Category = string;
 
 export interface ExtendedActivity extends Activity {
   category: Category;

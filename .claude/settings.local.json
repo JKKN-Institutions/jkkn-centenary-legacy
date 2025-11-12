@@ -55,7 +55,8 @@
       "Bash(if not exist \"src\\lib\\supabase\" mkdir \"src\\lib\\supabase\")",
       "Bash(if not exist \"src\\lib\\transformers\" mkdir \"src\\lib\\transformers\")",
       "Bash(Select-Object -First 50)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(node check-status.mjs:*)"
     ],
     "deny": [],
     "ask": []

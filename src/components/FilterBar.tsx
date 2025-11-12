@@ -2,7 +2,7 @@ import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { type Category } from "@/data/all-activities";
-import { useActivityCategories } from "@/hooks/useActivities";
+import { useActivityCategories, useActivityStatuses } from "@/hooks/useActivities";
 import { ActivityStatus } from "./StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +28,7 @@ const FilterBar = ({
   const { scrollDirection, isAtTop } = useScrollDirection();
   const { data: categories } = useActivityCategories();
   const categoriesList = categories || ['All'];
+  const statuses = useActivityStatuses();
 
   const hasActiveFilters = searchQuery !== "" || selectedCategory !== "All" || selectedStatus !== "all";
   
@@ -94,10 +95,13 @@ const FilterBar = ({
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="in-progress">In Progress</SelectItem>
-                <SelectItem value="upcoming">Upcoming</SelectItem>
+                {statuses.map((status) => (
+                  <SelectItem key={status} value={status}>
+                    {status === "all" ? "All Status" :
+                     status === "in-progress" ? "In Progress" :
+                     status.charAt(0).toUpperCase() + status.slice(1)}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
 
