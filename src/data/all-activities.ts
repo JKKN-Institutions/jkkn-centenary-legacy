@@ -18,6 +18,7 @@ export interface ExtendedActivity extends Activity {
   category: Category;
   progress?: number;
   image?: string;
+  hero_image_url?: string; // Direct URL from Supabase Storage
   dateCompleted?: string;
   dateScheduled?: string;
   metrics?: {

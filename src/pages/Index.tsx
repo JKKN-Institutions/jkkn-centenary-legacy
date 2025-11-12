@@ -5,14 +5,63 @@ import FilterBar from "@/components/FilterBar";
 import StatsOverview from "@/components/StatsOverview";
 import ShareButtons from "@/components/ShareButtons";
 import SEO from "@/components/SEO";
-import { allActivities, type Category } from "@/data/all-activities";
+import ShimmerLoader from "@/components/ShimmerLoader";
+import { type Category } from "@/data/all-activities";
 import { ActivityStatus } from "@/components/StatusBadge";
+import { useActivities } from "@/hooks/useActivities";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
   const [selectedStatus, setSelectedStatus] = useState<ActivityStatus | "all">("all");
-  
+
+  // Fetch activities from Supabase
+  const { data: activities, isLoading, error } = useActivities();
+
+  // Handle loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <SEO />
+        <Hero />
+        <div className="container px-4 py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <ShimmerLoader key={i} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Handle error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <SEO />
+        <Hero />
+        <div className="container px-4 py-20 flex items-center justify-center">
+          <div className="text-center max-w-md">
+            <h2 className="text-2xl font-bold text-destructive mb-4">
+              Failed to load activities
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              {error instanceof Error ? error.message : 'Unknown error occurred'}
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+            >
+              Reload Page
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const allActivities = activities || [];
   const completed = allActivities.filter(a => a.status === "completed").length;
   const inProgress = allActivities.filter(a => a.status === "in-progress").length;
   const upcoming = allActivities.filter(a => a.status === "upcoming").length;
@@ -23,10 +72,10 @@ const Index = () => {
         activity.impact.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === "All" || activity.category === selectedCategory;
       const matchesStatus = selectedStatus === "all" || activity.status === selectedStatus;
-      
+
       return matchesSearch && matchesCategory && matchesStatus;
     });
-  }, [searchQuery, selectedCategory, selectedStatus]);
+  }, [allActivities, searchQuery, selectedCategory, selectedStatus]);
 
   return (
     <div className="min-h-screen bg-background">

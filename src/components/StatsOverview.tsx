@@ -1,5 +1,5 @@
 import { CheckCircle2, Clock, Calendar, TrendingUp } from "lucide-react";
-import { allActivities } from "@/data/all-activities";
+import { useActivities } from "@/hooks/useActivities";
 import CounterAnimation from "./CounterAnimation";
 import { useRef } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
@@ -7,14 +7,18 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 const StatsOverview = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.2 });
-  
+  const { data: activities } = useActivities();
+
+  const allActivities = activities || [];
   const completed = allActivities.filter(a => a.status === "completed").length;
   const inProgress = allActivities.filter(a => a.status === "in-progress").length;
   const upcoming = allActivities.filter(a => a.status === "upcoming").length;
-  
-  const totalProgress = Math.round(
-    allActivities.reduce((sum, activity) => sum + (activity.progress || 0), 0) / allActivities.length
-  );
+
+  const totalProgress = allActivities.length > 0
+    ? Math.round(
+        allActivities.reduce((sum, activity) => sum + (activity.progress || 0), 0) / allActivities.length
+      )
+    : 0;
 
   const supportingStats = [
     {

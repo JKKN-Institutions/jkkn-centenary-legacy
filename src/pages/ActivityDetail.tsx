@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import { allActivities } from "@/data/all-activities";
 import { ArrowLeft, Calendar, Users, Heart, BookOpen, Award, DollarSign, Target, TrendingUp, Zap, Star, Gift, LucideIcon } from "lucide-react";
 import StatusBadge from "@/components/StatusBadge";
 import ShareButtons from "@/components/ShareButtons";
@@ -9,31 +8,11 @@ import TestimonialCard from "@/components/TestimonialCard";
 import DownloadButton from "@/components/DownloadButton";
 import RelatedActivities from "@/components/RelatedActivities";
 import SEO from "@/components/SEO";
+import ShimmerLoader from "@/components/ShimmerLoader";
 import { Button } from "@/components/ui/button";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useRef } from "react";
-
-import placardsImg from "@/assets/placards.jpg";
-import workersHonoredImg from "@/assets/workers-honored.jpg";
-import treesPlantedImg from "@/assets/trees-planted.jpg";
-import scholarshipsImg from "@/assets/scholarships.jpg";
-import booksDonatedImg from "@/assets/books-donated.jpg";
-import mealsServedImg from "@/assets/meals-served.jpg";
-import benchesInstalledImg from "@/assets/benches-installed.jpg";
-import alumniStoriesImg from "@/assets/alumni-stories.jpg";
-import bloodDonationsImg from "@/assets/blood-donations.jpg";
-
-const imageMap: Record<string, string> = {
-  "placards": placardsImg,
-  "workers-honored": workersHonoredImg,
-  "trees-planted": treesPlantedImg,
-  "scholarships": scholarshipsImg,
-  "books-donated": booksDonatedImg,
-  "meals-served": mealsServedImg,
-  "benches-installed": benchesInstalledImg,
-  "alumni-stories": alumniStoriesImg,
-  "blood-donations": bloodDonationsImg,
-};
+import { useActivity, useActivities } from "@/hooks/useActivities";
 
 const iconMap: Record<string, LucideIcon> = {
   Users,
@@ -50,20 +29,33 @@ const iconMap: Record<string, LucideIcon> = {
 
 const ActivityDetail = () => {
   const { id } = useParams();
-  const activity = allActivities.find((a) => a.id === id);
-  
+  const { data: activity, isLoading, error } = useActivity(id || '');
+  const { data: allActivities } = useActivities();
+
   // Refs for scroll animations
   const visionRef = useRef<HTMLElement>(null);
   const galleryRef = useRef<HTMLElement>(null);
   const impactRef = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
-  
+
   const visionVisible = useIntersectionObserver(visionRef, { threshold: 0.2 });
   const galleryVisible = useIntersectionObserver(galleryRef, { threshold: 0.1 });
   const impactVisible = useIntersectionObserver(impactRef, { threshold: 0.2 });
   const testimonialsVisible = useIntersectionObserver(testimonialsRef, { threshold: 0.1 });
 
-  if (!activity) {
+  // Handle loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="container px-4 py-20">
+          <ShimmerLoader />
+        </div>
+      </div>
+    );
+  }
+
+  // Handle error or not found
+  if (error || !activity) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center px-6">
@@ -84,16 +76,17 @@ const ActivityDetail = () => {
     );
   }
 
-  const heroImage = activity.image ? imageMap[activity.image] : null;
-  
+  // Use direct URL from database
+  const heroImage = activity.hero_image_url || null;
+
   // Find related activities
-  const relatedActivities = allActivities.filter(
+  const relatedActivities = (allActivities || []).filter(
     a => a.category === activity.category && a.id !== activity.id
   );
 
-  // Map gallery photos
+  // Map gallery photos - imageKey now contains direct URLs
   const galleryPhotosWithUrls: Photo[] = activity.galleryPhotos?.map(photo => ({
-    url: imageMap[photo.imageKey] || heroImage || "",
+    url: photo.imageKey, // This is now a direct URL from database
     caption: photo.caption
   })) || [];
 

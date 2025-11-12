@@ -1,12 +1,12 @@
 import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { categories, type Category } from "@/data/all-activities";
+import { type Category } from "@/data/all-activities";
+import { useActivityCategories } from "@/hooks/useActivities";
 import { ActivityStatus } from "./StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
-import { useState } from "react";
 
 interface FilterBarProps {
   searchQuery: string;
@@ -26,7 +26,9 @@ const FilterBar = ({
   onStatusChange,
 }: FilterBarProps) => {
   const { scrollDirection, isAtTop } = useScrollDirection();
-  
+  const { data: categories } = useActivityCategories();
+  const categoriesList = categories || ['All'];
+
   const hasActiveFilters = searchQuery !== "" || selectedCategory !== "All" || selectedStatus !== "all";
   
   const clearFilters = () => {
@@ -78,7 +80,7 @@ const FilterBar = ({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="All">All Categories</SelectItem>
-                {categories.filter(c => c !== "All").map((category) => (
+                {categoriesList.filter(c => c !== "All").map((category) => (
                   <SelectItem key={category} value={category}>
                     {category}
                   </SelectItem>

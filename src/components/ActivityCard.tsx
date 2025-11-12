@@ -7,16 +7,6 @@ import { useRef } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import ShimmerLoader from "./ShimmerLoader";
 
-import placardsImg from "@/assets/placards.jpg";
-import workersHonoredImg from "@/assets/workers-honored.jpg";
-import treesPlantedImg from "@/assets/trees-planted.jpg";
-import scholarshipsImg from "@/assets/scholarships.jpg";
-import booksDonatedImg from "@/assets/books-donated.jpg";
-import mealsServedImg from "@/assets/meals-served.jpg";
-import benchesInstalledImg from "@/assets/benches-installed.jpg";
-import alumniStoriesImg from "@/assets/alumni-stories.jpg";
-import bloodDonationsImg from "@/assets/blood-donations.jpg";
-
 export interface Activity {
   id: string;
   title: string;
@@ -26,20 +16,9 @@ export interface Activity {
   description?: string;
   progress?: number;
   image?: string;
+  hero_image_url?: string;
   category?: string;
 }
-
-const imageMap: Record<string, string> = {
-  "placards": placardsImg,
-  "workers-honored": workersHonoredImg,
-  "trees-planted": treesPlantedImg,
-  "scholarships": scholarshipsImg,
-  "books-donated": booksDonatedImg,
-  "meals-served": mealsServedImg,
-  "benches-installed": benchesInstalledImg,
-  "alumni-stories": alumniStoriesImg,
-  "blood-donations": bloodDonationsImg,
-};
 
 interface ActivityCardProps {
   activity: Activity;
@@ -49,7 +28,7 @@ interface ActivityCardProps {
 const ActivityCard = ({ activity, index = 0 }: ActivityCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(cardRef, { threshold: 0.1 });
-  const imageUrl = activity.image ? imageMap[activity.image] : null;
+  const imageUrl = activity.hero_image_url || null;
   const showProgress = activity.status === "in-progress" && activity.progress !== undefined;
   
   return (
