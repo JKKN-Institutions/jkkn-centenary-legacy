@@ -1,4 +1,4 @@
-import { Share2, Twitter, Facebook, Linkedin, Link as LinkIcon } from "lucide-react";
+import { Share2, Twitter, Facebook, Linkedin, Link as LinkIcon, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -43,6 +43,13 @@ const ShareButtons = ({ title, url }: ShareButtonsProps) => {
     );
   };
 
+  const shareOnWhatsApp = () => {
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`,
+      "_blank"
+    );
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -73,16 +80,23 @@ const ShareButtons = ({ title, url }: ShareButtonsProps) => {
           <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
           <span className="font-semibold">Share on Facebook</span>
         </DropdownMenuItem>
-        <DropdownMenuItem 
-          onClick={shareOnLinkedIn} 
+        <DropdownMenuItem
+          onClick={shareOnLinkedIn}
           className="gap-3 p-3 rounded-lg cursor-pointer hover:bg-info/10 hover:text-info transition-all duration-200 group"
         >
           <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
           <span className="font-semibold">Share on LinkedIn</span>
         </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={shareOnWhatsApp}
+          className="gap-3 p-3 rounded-lg cursor-pointer hover:bg-success/10 hover:text-success transition-all duration-200 group"
+        >
+          <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+          <span className="font-semibold">Share on WhatsApp</span>
+        </DropdownMenuItem>
         <div className="h-px bg-border/50 my-2" />
-        <DropdownMenuItem 
-          onClick={copyToClipboard} 
+        <DropdownMenuItem
+          onClick={copyToClipboard}
           className="gap-3 p-3 rounded-lg cursor-pointer hover:bg-primary/10 hover:text-primary transition-all duration-200 group"
         >
           <LinkIcon className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />

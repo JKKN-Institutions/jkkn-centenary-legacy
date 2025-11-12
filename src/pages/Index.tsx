@@ -18,6 +18,24 @@ const Index = () => {
   // Fetch activities from Supabase
   const { data: activities, isLoading, error } = useActivities();
 
+  // Prepare data for filtering (must be before early returns to follow Rules of Hooks)
+  const allActivities = activities || [];
+  const completed = allActivities.filter(a => a.status === "completed").length;
+  const inProgress = allActivities.filter(a => a.status === "in-progress").length;
+  const upcoming = allActivities.filter(a => a.status === "upcoming").length;
+
+  // useMemo must be called before any conditional returns
+  const filteredActivities = useMemo(() => {
+    return allActivities.filter((activity) => {
+      const matchesSearch = activity.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        activity.impact.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = selectedCategory === "All" || activity.category === selectedCategory;
+      const matchesStatus = selectedStatus === "all" || activity.status === selectedStatus;
+
+      return matchesSearch && matchesCategory && matchesStatus;
+    });
+  }, [allActivities, searchQuery, selectedCategory, selectedStatus]);
+
   // Handle loading state
   if (isLoading) {
     return (
@@ -60,22 +78,6 @@ const Index = () => {
       </div>
     );
   }
-
-  const allActivities = activities || [];
-  const completed = allActivities.filter(a => a.status === "completed").length;
-  const inProgress = allActivities.filter(a => a.status === "in-progress").length;
-  const upcoming = allActivities.filter(a => a.status === "upcoming").length;
-
-  const filteredActivities = useMemo(() => {
-    return allActivities.filter((activity) => {
-      const matchesSearch = activity.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        activity.impact.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory === "All" || activity.category === selectedCategory;
-      const matchesStatus = selectedStatus === "all" || activity.status === selectedStatus;
-
-      return matchesSearch && matchesCategory && matchesStatus;
-    });
-  }, [allActivities, searchQuery, selectedCategory, selectedStatus]);
 
   return (
     <div className="min-h-screen bg-background">

@@ -54,7 +54,8 @@
       "Bash(Select-String -Pattern \"user-assignment-selector\" -Context 2,2)",
       "Bash(if not exist \"src\\lib\\supabase\" mkdir \"src\\lib\\supabase\")",
       "Bash(if not exist \"src\\lib\\transformers\" mkdir \"src\\lib\\transformers\")",
-      "Bash(Select-Object -First 50)"
+      "Bash(Select-Object -First 50)",
+      "Bash(del:*)"
     ],
     "deny": [],
     "ask": []

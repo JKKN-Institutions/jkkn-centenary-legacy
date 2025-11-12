@@ -28,6 +28,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.claude
-.mcp.json
+.claude/*
+.mcp.json*  
 CLAUDE.md

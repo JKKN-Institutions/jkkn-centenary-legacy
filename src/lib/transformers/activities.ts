@@ -63,6 +63,23 @@ export const mapMetricIcon = (metricKey: string): string => {
   return iconFallback.default;
 };
 
+// Convert kebab-case or lowercase icon names to PascalCase for Lucide icons
+export const normalizeIconName = (iconName: string | null): string => {
+  if (!iconName) return 'Star';
+
+  // If already PascalCase, return as-is
+  if (/^[A-Z][a-zA-Z]+$/.test(iconName)) {
+    return iconName;
+  }
+
+  // Convert kebab-case or lowercase to PascalCase
+  // Examples: "tree-deciduous" -> "TreeDeciduous", "users" -> "Users"
+  return iconName
+    .split(/[-_\s]+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join('');
+};
+
 // Split vision text into paragraphs
 export const parseVisionText = (visionText: string | null): string[] | undefined => {
   if (!visionText) return undefined;
@@ -95,44 +112,52 @@ export const transformActivity = (dbActivity: DBActivityComplete): ExtendedActiv
     hero_image_url: dbActivity.hero_image_url,
 
     // Transform metrics
-    metrics: dbActivity.activity_metrics
-      ?.sort((a, b) => a.display_order - b.display_order)
-      .map(m => ({
-        icon: mapMetricIcon(m.metric_key),
-        label: m.metric_key,
-        value: m.metric_value,
-      })),
+    metrics: dbActivity.activity_metrics && dbActivity.activity_metrics.length > 0
+      ? dbActivity.activity_metrics
+          .sort((a, b) => a.display_order - b.display_order)
+          .map(m => ({
+            icon: mapMetricIcon(m.metric_key),
+            label: m.metric_key,
+            value: m.metric_value,
+          }))
+      : [],
 
     // Vision text
     visionText: parseVisionText(dbActivity.vision_text),
 
     // Transform gallery
-    galleryPhotos: dbActivity.activity_gallery
-      ?.sort((a, b) => a.display_order - b.display_order)
-      .map(g => ({
-        imageKey: g.image_url, // Store URL directly (will use as-is, not lookup)
-        caption: g.caption || '',
-      })),
+    galleryPhotos: dbActivity.activity_gallery && dbActivity.activity_gallery.length > 0
+      ? dbActivity.activity_gallery
+          .sort((a, b) => a.display_order - b.display_order)
+          .map(g => ({
+            imageKey: g.image_url, // Store URL directly (will use as-is, not lookup)
+            caption: g.caption || '',
+          }))
+      : [],
 
     // Transform impact stats
-    impactStats: dbActivity.activity_impact_stats
-      ?.sort((a, b) => a.display_order - b.display_order)
-      .map(s => ({
-        icon: s.icon || 'Star',
-        value: parseInt(s.value) || 0,
-        label: s.label,
-        color: undefined, // Color not stored in DB
-      })),
+    impactStats: dbActivity.activity_impact_stats && dbActivity.activity_impact_stats.length > 0
+      ? dbActivity.activity_impact_stats
+          .sort((a, b) => a.display_order - b.display_order)
+          .map(s => ({
+            icon: normalizeIconName(s.icon),
+            value: parseInt(s.value) || 0,
+            label: s.label,
+            color: undefined, // Color not stored in DB
+          }))
+      : [],
 
     // Transform testimonials
-    testimonials: dbActivity.activity_testimonials
-      ?.sort((a, b) => a.display_order - b.display_order)
-      .map(t => ({
-        quote: t.content,
-        name: t.author_name,
-        role: t.author_role || '',
-        avatar: t.author_avatar_url || undefined,
-      })),
+    testimonials: dbActivity.activity_testimonials && dbActivity.activity_testimonials.length > 0
+      ? dbActivity.activity_testimonials
+          .sort((a, b) => a.display_order - b.display_order)
+          .map(t => ({
+            quote: t.content,
+            name: t.author_name,
+            role: t.author_role || '',
+            avatar: t.author_avatar_url || undefined,
+          }))
+      : [],
   };
 };
 
