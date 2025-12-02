@@ -149,7 +149,7 @@ const Index = () => {
                 <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-br from-primary via-primary to-primary-dark bg-clip-text text-transparent">
                   1925
                 </div>
-                <div className="text-xs sm:text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-1 sm:mt-2">Founded</div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-semibold uppercase tracking-wider mt-1 sm:mt-2">Founder Birthday</div>
               </div>
               
               <div className="hidden sm:block w-12 md:w-24 h-0.5 md:h-1 bg-gradient-to-r from-primary via-primary-light to-primary-glow rounded-full" />
@@ -212,7 +212,7 @@ const Index = () => {
                 JKKN Centenary
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                100 Years of Educational Excellence
+               Celebrating Founder’s Centenary Year
               </p>
             </div>
             
