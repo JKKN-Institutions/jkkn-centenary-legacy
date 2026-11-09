@@ -34,3 +34,6 @@ dist-ssr
 .claude/*
 .mcp.json*  
 CLAUDE.md
+
+# MCP client config can hold access tokens; never commit it
+.mcp.json
